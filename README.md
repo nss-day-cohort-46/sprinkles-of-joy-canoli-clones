@@ -12,6 +12,7 @@ After each team member clones down the repository
 Add a pull request template for this project with these [instructions](https://docs.github.com/en/github/building-a-strong-community/creating-a-pull-request-template-for-your-repository).
 
 ## ERD
+ERD for Sprinkles Of Joy(canoli-clones): https://dbdiagram.io/d/602ea58380d742080a3b1ab7
 
 Your very first step is to create an Entity Relationship Diagram and get it approved by an instructor. Take a look at your database and use either dbdiagram.io or Lucidchart to build the ERD. Once your ERD has been approved, be sure to add a link to it in your README. If at any time during this project, your team needs to modify your ERD, please communicate the changes and get approval.
 

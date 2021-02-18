@@ -9,6 +9,7 @@ let bakeryProducts = []
 let bakeryCategories = []
 
 export const ProductList = () => {
+  // debugger
   getProducts()
     .then(getCategories)
     .then(() => {
@@ -18,9 +19,23 @@ export const ProductList = () => {
     })
 }
 
+//added event listener to filter through category items in dropdown 
+eventHub.addEventListener("categorySelected", event => {
+  const catId = event.detail.selectedCategory
+  if(catId !== "0"){
+bakeryProducts = useProducts().filter(product => product.categoryId === parseInt(catId))
+
+    render()
+  } else {
+    bakeryProducts = useProducts()
+    render()
+  }
+})
+
 const render = () => {
   contentTarget.innerHTML = bakeryProducts.map(product => {
-    const productCategory = bakeryCategories.find(category => cat.id === product.categoryId)
+    //changed cat.id to category.id
+    const productCategory = bakeryCategories.find(category => category.id === product.categoryId)
 
     return Product(product, productCategory)
   }).join("")
