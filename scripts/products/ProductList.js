@@ -19,19 +19,6 @@ export const ProductList = () => {
     })
 }
 
-//added event listener to filter through category items in dropdown 
-eventHub.addEventListener("categorySelected", event => {
-  const catId = event.detail.selectedCategory
-  if(catId !== "0"){
-bakeryProducts = useProducts().filter(product => product.categoryId === parseInt(catId))
-
-    render()
-  } else {
-    bakeryProducts = useProducts()
-    render()
-  }
-})
-
 const render = () => {
   contentTarget.innerHTML = bakeryProducts.map(product => {
     //changed cat.id to category.id
@@ -40,3 +27,19 @@ const render = () => {
     return Product(product, productCategory)
   }).join("")
 }
+
+//added event listener to filter through category items in dropdown 
+eventHub.addEventListener("categorySelected", event => {
+//gets the selected category id from dropdown
+  const catId = event.detail.selectedCategory
+//checks to see if the user is sorting by ALL categories or a SPECIFIC category
+  if(catId !== "0"){
+bakeryProducts = useProducts().filter(product => product.categoryId === parseInt(catId))
+    render()
+  } else {
+    //doing the same thing as line 17.
+    bakeryProducts = useProducts()
+    render()
+  }
+})
+
