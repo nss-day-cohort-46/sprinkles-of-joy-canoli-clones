@@ -29,12 +29,13 @@ const render = () => {
     `
   }
 }
-
+// Changed the querySelector from searching for a class to an id. Added .value to the return the contents vs just the container for the login information.
 eventHub.addEventListener("click", e => {
   if (e.target.id === "customerLogin") {
     e.preventDefault()
-    const loginEmail = document.querySelector(".login-email")
-    const loginPassword = document.querySelector(".login-password")
+    // debugger
+    const loginEmail = document.querySelector("#login-email").value
+    const loginPassword = document.querySelector("#login-password").value
 
     customerLogin(loginEmail, loginPassword)
       .then(user => {
