@@ -10,7 +10,9 @@ export const Product = (product, category) => {
             <div>
                 <button id="addProduct">Add to Cart</button>
                 <p>${product.description} [${category.name}]</p>
+                <p>"write review"</p>
             </div>
+            
         </section>
     `
 }
