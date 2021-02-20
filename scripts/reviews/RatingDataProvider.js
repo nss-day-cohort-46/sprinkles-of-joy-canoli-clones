@@ -13,16 +13,3 @@ export const getRatings = () => {
 export const useRatings = () => {
     return rating.slice()
 }
-
-
-export const saveRating = (rating) => {
-    return fetch("http://localhost:8088/productReviews?_expand=rating", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(rating)
-    })
-        .then(() => getRatings())  // <-- Get all journal entries
-        .then(dispatchDeleteStateChangeEvent)  // <-- Broadcast the state change event
-}
