@@ -6,11 +6,13 @@ import { getCustomer } from "../customers/CustomerProvider.js"
 const eventHub = document.querySelector("#container")
 const userNav = document.querySelector(".userNav")
 
+//invoked functions in CustomerNav
 export const CustomerNav = () => {
   if (authHelper.isUserLoggedIn()) {
     getCustomer(authHelper.getCurrentUserId())
       .then(userObject => {
         render(userObject)
+        console.log(userObject)
       })
   }
 }

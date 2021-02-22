@@ -12,7 +12,8 @@ export const getCustomers = () => {
     })
 }
 export const getCustomer = (id) => {
-  return fetch(`${bakeryAPI.baseURL}/customers?id=${id}`)
+  //updated url
+  return fetch(`${bakeryAPI.baseURL}/customers/${id}`)
     .then(response => response.json())
 }
 

@@ -8,6 +8,7 @@ let orders = []
 export const useOrders = () => orders.slice()
 
 export const getOrders = (customerId) => {
+  //now grabs orders that have a customerid equal to what is being passed through
   return fetch(`${bakeryAPI.baseURL}/orders?_expand=status&customerId=${customerId}`)
     .then(response => response.json())
     .then(parsedResponse => {
