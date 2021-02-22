@@ -8,11 +8,14 @@ import { CategorySelect } from "./categories/CategorySelect.js"
 import { LoginForm } from "./customers/LoginForm.js"
 import { ProductList } from "./products/ProductList.js"
 import { getRatings, useRatings } from "./reviews/RatingDataProvider.js"
-
+//adding orderhistorybutton
+import "./orders/OrderHistoryLink.js"
+// import { getOrders } from "./orders/OrderProvider.js"
 LoginForm()
 CustomerNav()
 CategorySelect()
 ProductList()
-
+// getOrders() 
 useRatings()
 getRatings()
+// showPastOrders()

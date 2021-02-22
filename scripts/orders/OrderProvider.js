@@ -7,11 +7,11 @@ let orders = []
 
 export const useOrders = () => orders.slice()
 
-export const getOrders = () => {
-  return fetch(`${bakeryAPI.baseURL}/orders?_expand=status`)
+export const getOrders = (customerId) => {
+  return fetch(`${bakeryAPI.baseURL}/orders?_expand=status&customerId=${customerId}`)
     .then(response => response.json())
-    .then(response => {
-      customerOrders = response
+    .then(parsedResponse => {
+      orders = parsedResponse
     })
 }
 

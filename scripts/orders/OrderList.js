@@ -7,11 +7,13 @@ const eventHub = document.querySelector("#container")
 const contentContainer = document.querySelector(".userOrders")
 
 let customerOrders = []
+// let customersId = sessionStorage.getItem("soj-customer-id")
 
 export const OrderList = () => {
   if (authHelper.isUserLoggedIn()) {
-
-    getOrders()
+    // getCustomer()
+    debugger
+    getOrders(authHelper.getCurrentUserId)
       .then(() => {
         customerOrders = useOrders()
         render()
@@ -36,8 +38,18 @@ const render = () => {
       `
 }
 
-eventHub.addEventListener("showOrderHistory", () => {
+eventHub.addEventListener("showPastOrders", () => {
   OrderList()
+  // customerOrders = useOrders()
+  // const userLoggedIn = customersId
+  // debugger
+  // const ordersObject = customerOrders.filter(
+  //   order => {
+  //     if (ordersObject.customerId === customersId) {
+  //         return true
+  //     }
+  //   })
+    // render(ordersObject, customerOrders, userLoggedIn)
 })
 
 eventHub.addEventListener("click", event => {
