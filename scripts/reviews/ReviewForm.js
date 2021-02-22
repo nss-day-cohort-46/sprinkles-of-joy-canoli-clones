@@ -68,8 +68,8 @@ eventHub.addEventListener("click", clickEvent => {
             const newReview = {
                 "review": document.querySelector("#reviewText").value,
                 "ratingId": parseInt(document.querySelector("#rating").value),
-                "productId": document.querySelector("#productReviewed").value,
-                "customerId": customerId
+                "productId": parseInt(document.querySelector("#productReviewed").value),
+                "customerId": parseInt(customerId)
             }
             // debugger
             saveReview(newReview)

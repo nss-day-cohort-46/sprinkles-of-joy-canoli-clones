@@ -10,9 +10,7 @@ export const getReviews = () => {
         })
 }
 
-export const useReviews = () => {
-    return reviews.slice
-}
+export const useReviews = () => reviews.slice()
 
 
 export const saveReview = (review) => {

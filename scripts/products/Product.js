@@ -12,7 +12,7 @@ export const Product = (product, category) => {
             <div>
                 <button id="addProduct">Add to Cart</button>
                 <p>${product.description} [${category.name}]</p>
-                <a href="#" id="reviews--${product.id}"><em>Reviews</em></a>
+                <a href="#"><em id="reviews--${product.id}">Reviews</em></a>
             </div>
             
         </section>
@@ -39,7 +39,6 @@ eventHub.addEventListener("click", event => {
                 productId: parseInt(productId)
             }
         })
-        console.log('this is in product.js --- reviewEvent: ', reviewEvent);
         eventHub.dispatchEvent(customEvent)
     }
 })

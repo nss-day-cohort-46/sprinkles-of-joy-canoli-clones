@@ -32,9 +32,11 @@ const render = () => {
 eventHub.addEventListener("ReviewsClicked", event => {
     console.log("this is in reviewList.js --- Review click heard")
     const selectedProductId = event.detail.productId
-    const productArray = useProducts()
-    const selectedProduct = productArray.filter((product) => product.id === selectedProductId)
-    ReviewList(selectedProduct)
+    const productArray = useProducts().find(product => product.id === parseInt(selectedProductId))
+    debugger
+    const selectedProduct = productArray
+    customerReviews = useReviews().filter(review => review.productId === selectedProduct.id)
+    render()
 })
 
 eventHub.addEventListener("click", event => {
