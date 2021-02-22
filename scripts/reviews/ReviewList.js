@@ -1,20 +1,21 @@
 import { ReviewEntryComponent } from "./ReviewEntry.js"
 import { getReviews, useReviews } from "./ReviewDataProvider.js"
-import { useProducts } from "../products/ProductProvider.js"
 
 const eventHub = document.querySelector("#container")
 const contentContainer = document.querySelector(".userReviews")
 
 let customerReviews = []
 
-export const ReviewList = () => {
-    getReviews()
+// passing in productId of selected product. I get this information from the click event details.
+export const ReviewList = (productId) => {
+    getReviews(productId)
         .then(() => {
             customerReviews = useReviews()
             render()
         })
 }
 
+// this is the format passing in all reviews
 const render = () => {
     const reviewsHtmlRepresentation = customerReviews.map(review => ReviewEntryComponent(review)).join("")
 
@@ -29,14 +30,10 @@ const render = () => {
         `
 }
 
+// listening for click from Product.js and passes the produtId into the ReviewList so it will pass that arguement in the get and only return reviews for that product
 eventHub.addEventListener("ReviewsClicked", event => {
-    console.log("this is in reviewList.js --- Review click heard")
     const selectedProductId = event.detail.productId
-    const productArray = useProducts().find(product => product.id === parseInt(selectedProductId))
-    debugger
-    const selectedProduct = productArray
-    customerReviews = useReviews().filter(review => review.productId === selectedProduct.id)
-    render()
+    ReviewList(parseInt(selectedProductId))
 })
 
 eventHub.addEventListener("click", event => {
