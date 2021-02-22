@@ -34,11 +34,11 @@ eventHub.addEventListener("click", evt => {
 eventHub.addEventListener("click", event => {
     if (event.target.id.startsWith("reviews--")) {
         const [prefix, productId] = event.target.id.split("--")
-        const customEvent = new CustomEvent("ReviewsClicked", {
+        const showReviewEvent = new CustomEvent("ReviewsClicked", {
             detail: {
                 productId: parseInt(productId)
             }
         })
-        eventHub.dispatchEvent(customEvent)
+        eventHub.dispatchEvent(showReviewEvent)
     }
 })
