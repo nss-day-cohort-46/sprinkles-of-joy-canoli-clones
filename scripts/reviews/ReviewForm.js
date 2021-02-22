@@ -1,6 +1,7 @@
 import { getProducts, useProducts } from "../products/ProductProvider.js"
 import { getRatings, useRatings } from "./RatingDataProvider.js"
 import { saveReview } from "./ReviewDataProvider.js"
+import { authHelper } from "../auth/authHelper.js"
 
 const contentTarget = document.querySelector(".reviewForm")
 const eventHub = document.querySelector("#container")
@@ -16,7 +17,8 @@ const render = () => {
             const allProducts = useProducts()
 
             contentTarget.innerHTML = `
-                <div class="reviewFormSection">
+            <div id="orders__modal" class="modal--parent">
+            <div class="modal--content">
                 <form class="formContainer">
                     <div class="productSelectSection">
                      <label for="productReviewed">Product</label>
@@ -47,6 +49,8 @@ const render = () => {
 
                     <button class="saveReviewButton" id="saveReview" type="button">Save Review</button>
                 </form>
+                <button id="modal--close">Close</button>
+                </div>
                 </div>
         `
         })
@@ -58,19 +62,21 @@ const ReviewFormComponent = () => {
 
 // this eventHub listens for the click of the save button & gets the value and sends them to ReviewDataProvider
 eventHub.addEventListener("click", clickEvent => {
-    if (clickEvent.target.id === "saveReview") {
-        clickEvent.preventDefault()
-        const newReview = {
-            "review": document.querySelector("#reviewText").value,
-            "ratingId": parseInt(document.querySelector("#rating").value),
-            "productId": document.querySelector("#productReviewed").value,
-            "customerId": customerId
+    if (authHelper.isUserLoggedIn()) {
+        if (clickEvent.target.id === "saveReview") {
+            clickEvent.preventDefault()
+            const newReview = {
+                "review": document.querySelector("#reviewText").value,
+                "ratingId": parseInt(document.querySelector("#rating").value),
+                "productId": document.querySelector("#productReviewed").value,
+                "customerId": customerId
+            }
+            // debugger
+            saveReview(newReview)
+                .then(() => {
+                    document.querySelector(".formContainer").reset()
+                })
         }
-        // debugger
-        saveReview(newReview)
-            .then(() => {
-                document.querySelector(".formContainer").reset()
-            })
     }
 })
 
@@ -80,3 +86,13 @@ eventHub.addEventListener("click", clickEvent => {
 eventHub.addEventListener("showNewReviewForm", event => {
     ReviewFormComponent()
 })
+
+eventHub.addEventListener("click", event => {
+    if (event.target.id === "modal--close") {
+        closeModal()
+    }
+})
+
+const closeModal = () => {
+    contentTarget.innerHTML = ""
+}
