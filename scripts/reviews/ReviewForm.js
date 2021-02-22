@@ -19,7 +19,7 @@ const render = () => {
             contentTarget.innerHTML = `
             <div id="orders__modal" class="modal--parent">
             <div class="modal--content">
-                <form class="formContainer">
+                <form>
                     <div class="productSelectSection">
                      <label for="productReviewed">Product</label>
                         <select class="productReviewed" name="productReviewed" id="productReviewed">
