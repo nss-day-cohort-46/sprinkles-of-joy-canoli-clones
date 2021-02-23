@@ -1,11 +1,15 @@
 import { authHelper } from "../auth/authHelper.js"
 import { Order } from "./Order.js"
 import { getOrders, useOrders } from "./OrderProvider.js"
+// import { getOrderProducts, useOrderProducts } from "./OrderProductProvider.js"
 
 const eventHub = document.querySelector("#container")
 const contentContainer = document.querySelector(".userOrders")
 
 let customerOrders = []
+// let orderProducts = []
+// let products = []
+//NOW WHAT 
 
 export const OrderList = () => {
   if (authHelper.isUserLoggedIn()) {
