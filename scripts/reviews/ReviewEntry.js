@@ -4,6 +4,7 @@ import { authHelper } from "../auth/authHelper.js"
 let currentCustomerId = sessionStorage.getItem("soj-customer-id")
 
 // This is HTML format for how the review will render to the dom
+// Refactored the delete button so that only the loggedin user can delete reviews that they posted
 export const ReviewEntryComponent = (review) => {
     let deleteButton = ""
     if (review.customerId === parseInt(currentCustomerId)) {
