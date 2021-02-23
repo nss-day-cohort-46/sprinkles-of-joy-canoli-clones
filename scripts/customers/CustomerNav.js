@@ -1,14 +1,18 @@
 import { authHelper } from "../auth/authHelper.js"
 import { getCustomer } from "../customers/CustomerProvider.js"
+// import { OrderList } from "../orders/OrderList.js"
+
 
 const eventHub = document.querySelector("#container")
 const userNav = document.querySelector(".userNav")
 
+//invoked functions in CustomerNav
 export const CustomerNav = () => {
   if (authHelper.isUserLoggedIn()) {
     getCustomer(authHelper.getCurrentUserId())
       .then(userObject => {
         render(userObject)
+        console.log(userObject)
       })
   }
 }
@@ -19,7 +23,7 @@ const render = (customer) => {
     <ul class="userNav__links">
     <a href="#"><li class="userNav__link" id="userNav--showCart">My Cart</li></a>
     <a href="#"><li class="userNav__link" id="userNav--newReview">New Review</li><a>
-    <li class="userNav__link" id="userNav--pastOrders">Order History</li>
+   <a href="#"><li class="userNav__link" id="userNav--pastOrders">Order History</li></a>
     </ul>
   `
 }
