@@ -16,6 +16,13 @@ const render = () => {
   let cartHTML = ""
   let totalCost = 0
 
+  let placeOrderButton = `<button id="placeOrder">Place Order</button>`
+  if (productsInCart.length === 0) {
+    document.getElementById("placeOrder").disabled() = true
+  } else {
+    document.getElementById("placeOrder").disabled() = false
+  }
+
   for (const product of productsInCart) {
     cartHTML += `
       <div class="cart">
@@ -32,7 +39,7 @@ const render = () => {
     ${cartHTML}
     <hr/>
     <div class="cart">
-    <button id="placeOrder">Place Order</button>
+      ${placeOrderButton}
     <p>$${totalCost.toFixed(2)}</p>
     </div>
     </div>
@@ -68,6 +75,10 @@ eventHub.addEventListener("click", clickEvent => {
         }
 
         return saveOrder(newOrder, productsInCart)
+          .then(() => {
+            productsInCart = []
+            OpenCart()
+          })
       })
   }
 })
