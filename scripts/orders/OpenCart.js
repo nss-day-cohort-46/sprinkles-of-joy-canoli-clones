@@ -16,11 +16,12 @@ const render = () => {
   let cartHTML = ""
   let totalCost = 0
 
-  let placeOrderButton = `<button id="placeOrder">Place Order</button>`
+  // created a variable to hold the button so it could have a conditional statement that if there is nothing in the cart the button is diabled
+  let placeOrderButton = `
+  <button id="placeOrder">Place Order</button>
+  `
   if (productsInCart.length === 0) {
-    document.getElementById("placeOrder").disabled() = true
-  } else {
-    document.getElementById("placeOrder").disabled() = false
+    placeOrderButton = `<button id="placeOrder" disabled>Place Order</button>`
   }
 
   for (const product of productsInCart) {
@@ -39,7 +40,7 @@ const render = () => {
     ${cartHTML}
     <hr/>
     <div class="cart">
-      ${placeOrderButton}
+    ${placeOrderButton}
     <p>$${totalCost.toFixed(2)}</p>
     </div>
     </div>

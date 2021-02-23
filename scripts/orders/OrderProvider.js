@@ -27,7 +27,8 @@ export const saveOrder = (order, productsInOrder) => {
     body: JSON.stringify(order)
   })
     .then(res => res.json())
-    .then(() => {
+    // passed createdOrder in the .then so that it passes through the orderId
+    .then((createdOrder) => {
       const orderProducts = productsInOrder.map(product => {
         return {
           "orderId": createdOrder.id,
@@ -45,8 +46,8 @@ export const deleteOrder = orderId => {
   return fetch(`${bakeryAPI.baseURL}/orders/${orderId}`, {
     method: "DELETE"
   })
-  .then(getOrders)
-  .then(OrderList)
+    .then(getOrders)
+    .then(OrderList)
 }
 
 //listens for delete button click and then invokes function that does the deltion
