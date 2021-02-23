@@ -16,6 +16,14 @@ const render = () => {
   let cartHTML = ""
   let totalCost = 0
 
+  // created a variable to hold the button so it could have a conditional statement that if there is nothing in the cart the button is diabled
+  let placeOrderButton = `
+  <button id="placeOrder">Place Order</button>
+  `
+  if (productsInCart.length === 0) {
+    placeOrderButton = `<button id="placeOrder" disabled>Place Order</button>`
+  }
+
   for (const product of productsInCart) {
     cartHTML += `
       <div class="cart">
@@ -32,7 +40,7 @@ const render = () => {
     ${cartHTML}
     <hr/>
     <div class="cart">
-    <button id="placeOrder">Place Order</button>
+    ${placeOrderButton}
     <p>$${totalCost.toFixed(2)}</p>
     </div>
     </div>
@@ -41,8 +49,9 @@ const render = () => {
 
 eventHub.addEventListener("showCustomerCart", e => OpenCart())
 
+// changed the name of event.detail.--- to addedProduct to match what the detail was being sent from the click event
 eventHub.addEventListener("addToCart", event => {
-  const productId = event.detail.productId
+  const productId = event.detail.addedProduct
   getProducts()
     .then(() => {
       const allProducts = useProducts()
@@ -67,6 +76,10 @@ eventHub.addEventListener("click", clickEvent => {
         }
 
         return saveOrder(newOrder, productsInCart)
+          .then(() => {
+            productsInCart = []
+            OpenCart()
+          })
       })
   }
 })
