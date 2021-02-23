@@ -9,6 +9,7 @@ import { LoginForm } from "./customers/LoginForm.js"
 import { ProductList } from "./products/ProductList.js"
 import "./reviews/ReviewForm.js"
 import "./reviews/ReviewList.js"
+import "./contacts/ContactForm.js"
 
 LoginForm()
 CustomerNav()
