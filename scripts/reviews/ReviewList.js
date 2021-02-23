@@ -1,27 +1,29 @@
 import { ReviewEntryComponent } from "./ReviewEntry.js"
 import { getReviews, useReviews } from "./ReviewDataProvider.js"
-import { useProducts } from "../products/ProductProvider.js"
 
 const eventHub = document.querySelector("#container")
 const contentContainer = document.querySelector(".userReviews")
 
 let customerReviews = []
 
-export const ReviewList = () => {
-    getReviews()
+// passing in productId of selected product. I get this information from the click event details.
+export const ReviewList = (productId) => {
+    getReviews(productId)
         .then(() => {
             customerReviews = useReviews()
-            render()
+            render(productId)
         })
 }
 
-const render = () => {
+// this is the format passing in all reviews
+const render = (productId) => {
     const reviewsHtmlRepresentation = customerReviews.map(review => ReviewEntryComponent(review)).join("")
 
     contentContainer.innerHTML = `
     <div id="orders__modal" class="modal--parent">
           <div class="modal--content">
           <h3>Reviews</h3>
+          <input type="hidden" id="hiddenProductId" value="${productId}">
           ${reviewsHtmlRepresentation}
           <button id="modal--close">Close</button>
           </div>
@@ -29,14 +31,11 @@ const render = () => {
         `
 }
 
+// listening for click from Product.js and passes the produtId into the ReviewList so it will pass that arguement in the get and only return reviews for that product
 eventHub.addEventListener("ReviewsClicked", event => {
-    console.log("this is in reviewList.js --- Review click heard")
     const selectedProductId = event.detail.productId
-    const productArray = useProducts().find(product => product.id === parseInt(selectedProductId))
-    debugger
-    const selectedProduct = productArray
-    customerReviews = useReviews().filter(review => review.productId === selectedProduct.id)
-    render()
+    ReviewList(parseInt(selectedProductId))
+
 })
 
 eventHub.addEventListener("click", event => {
@@ -48,3 +47,11 @@ eventHub.addEventListener("click", event => {
 const closeModal = () => {
     contentContainer.innerHTML = ""
 }
+
+// event listening for any state change and gets productId from hidden input in the content container above in the render
+eventHub.addEventListener("reviewStateChanged", event => {
+    const productId = document.getElementById("hiddenProductId").value
+    if (contentContainer.innerHTML !== "") {
+        ReviewList(productId)
+    }
+})
