@@ -19,8 +19,8 @@ const render = () => {
             contentTarget.innerHTML = `
             <div id="orders__modal" class="modal--parent">
             <div class="modal--content">
-                <form class="formContainer">
-                    <div class="productSelectSection">
+                <form>
+                    <fieldset>
                      <label for="productReviewed">Product</label>
                         <select class="productReviewed" name="productReviewed" id="productReviewed">
                              <option value="0">Select Product</option>
@@ -29,9 +29,9 @@ const render = () => {
             }).join("")
                 }
                         </select>
-                    </div>
+                    </fieldset>
 
-                    <div class="ratingSection">
+                    <fieldset>
                      <label for="rating">Rating</label>
                         <select class="rating" name="rating" id="rating">
                              <option value="0">Select Rating</option>
@@ -40,14 +40,16 @@ const render = () => {
                 }).join("")
                 }
                         </select>
-                    </div>
+                    </fieldset>
 
-                    <div class="reviewSection">
+                    <fieldset>
                     <label for="reviewText">Write your Review here:</label>
                         <textarea class="reviewText" id="reviewText"></textarea>
-                    </div>
+                    </fieldset>
 
+                    <fieldset>
                     <button class="saveReviewButton" id="saveReview" type="button">Save Review</button>
+                    </fieldset>
                 </form>
                 <button id="modal--close">Close</button>
                 </div>
