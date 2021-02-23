@@ -7,12 +7,11 @@ import { CustomerNav } from "./customers/CustomerNav.js"
 import { CategorySelect } from "./categories/CategorySelect.js"
 import { LoginForm } from "./customers/LoginForm.js"
 import { ProductList } from "./products/ProductList.js"
-import { getRatings, useRatings } from "./reviews/RatingDataProvider.js"
+import "./reviews/ReviewForm.js"
+import "./reviews/ReviewList.js"
+import "./contacts/ContactForm.js"
 
 LoginForm()
 CustomerNav()
 CategorySelect()
 ProductList()
-
-useRatings()
-getRatings()
