@@ -42,7 +42,7 @@ const render = () => {
                         </select>
                     </div>
 
-                    <div class="reviesSection">
+                    <div class="reviewSection">
                     <label for="reviewText">Write your Review here:</label>
                         <textarea class="reviewText" id="reviewText"></textarea>
                     </div>

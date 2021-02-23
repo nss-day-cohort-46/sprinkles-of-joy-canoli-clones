@@ -1,5 +1,7 @@
 import { bakeryAPI } from "../Settings.js"
 
+const eventHub = document.querySelector("#container")
+
 let reviews = []
 
 export const useReviews = () => reviews.slice()
@@ -14,9 +16,7 @@ export const getReviews = (productId) => {
         })
 }
 
-
-
-export const saveReview = (review) => {
+export const saveReview = review => {
     return fetch(`${bakeryAPI.baseURL}/productReviews?_expand=rating`, {
         method: "POST",
         headers: {
@@ -25,5 +25,17 @@ export const saveReview = (review) => {
         body: JSON.stringify(review)
     })
         .then(() => getReviews())  // <-- Get all reviews
-        .then()
+}
+
+export const deleteReviews = reviewId => {
+    return fetch(`${bakeryAPI.baseURL}/productReviews/${reviewId}`, {
+        method: "DELETE"
+    })
+        .then(getReviews)
+        .then(dispatchStateChangeEvent)
+}
+
+const dispatchStateChangeEvent = () => {
+    const reviewStateChangedEvent = new CustomEvent("reviewStateChanged")
+    eventHub.dispatchEvent(reviewStateChangedEvent)
 }
