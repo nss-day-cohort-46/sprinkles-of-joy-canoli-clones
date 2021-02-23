@@ -41,8 +41,9 @@ const render = () => {
 
 eventHub.addEventListener("showCustomerCart", e => OpenCart())
 
+// changed the name of event.detail.--- to addedProduct to match what the detail was being sent from the click event
 eventHub.addEventListener("addToCart", event => {
-  const productId = event.detail.productId
+  const productId = event.detail.addedProduct
   getProducts()
     .then(() => {
       const allProducts = useProducts()
